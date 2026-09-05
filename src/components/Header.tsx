@@ -9,11 +9,13 @@ import { categories } from '../data/mockData';
 import CartDrawer from './CartDrawer';
 import AuthModal from './AuthModal';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const { cartCount, cartTotal } = useCart();
   const { wishlistCount } = useWishlist();
   const { isAuthenticated, user } = useAuth();
+  const pathname = usePathname();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
@@ -140,6 +142,72 @@ export default function Header() {
           ))}
           <Link href="/deals" className="flex items-center gap-1 hover:text-primary transition">Deals</Link>
         </nav>
+      </div>
+
+      {/* Mobile Search Bar (Only visible on mobile) */}
+      <div className="md:hidden bg-white px-4 py-2 border-b">
+        <form action="/search" className="flex w-full relative">
+          <input
+            type="text"
+            name="q"
+            placeholder="Search products..."
+            className="w-full border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-primary text-sm"
+          />
+          <button type="submit" className="bg-primary text-white px-4 rounded-r-md hover:bg-primary-dark transition flex items-center justify-center">
+            <Search size={18} />
+          </button>
+        </form>
+      </div>
+
+      {/* Mobile Bottom Navigation Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 flex justify-around items-center py-2 px-1 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+        <Link href="/" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/' ? 'text-primary' : 'text-gray-500'}`}>
+          <div className="w-6 h-6 flex justify-center"><ShoppingCart size={22} /></div>
+          <span className="text-[10px] font-medium">Home</span>
+        </Link>
+        <Link href="/search" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/search' ? 'text-primary' : 'text-gray-500'}`}>
+          <div className="w-6 h-6 flex justify-center"><Search size={22} /></div>
+          <span className="text-[10px] font-medium">Search</span>
+        </Link>
+        <button 
+          onClick={() => setIsCartOpen(true)}
+          className="flex flex-col items-center gap-1 p-2 text-gray-500 relative"
+        >
+          <div className="relative w-6 h-6 flex justify-center">
+            <ShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                {cartCount}
+              </span>
+            )}
+          </div>
+          <span className="text-[10px] font-medium">Cart</span>
+        </button>
+        <Link href="/wishlist" className={`flex flex-col items-center gap-1 p-2 relative ${pathname === '/wishlist' ? 'text-primary' : 'text-gray-500'}`}>
+          <div className="relative w-6 h-6 flex justify-center">
+            <Heart size={22} />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                {wishlistCount}
+              </span>
+            )}
+          </div>
+          <span className="text-[10px] font-medium">Wishlist</span>
+        </Link>
+        {isAuthenticated ? (
+          <Link href="/profile" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/profile' ? 'text-primary' : 'text-gray-500'}`}>
+            <div className="w-6 h-6 flex justify-center"><User size={22} /></div>
+            <span className="text-[10px] font-medium">Profile</span>
+          </Link>
+        ) : (
+          <button 
+            onClick={() => setIsAuthOpen(true)}
+            className="flex flex-col items-center gap-1 p-2 text-gray-500"
+          >
+            <div className="w-6 h-6 flex justify-center"><User size={22} /></div>
+            <span className="text-[10px] font-medium">Login</span>
+          </button>
+        )}
       </div>
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
