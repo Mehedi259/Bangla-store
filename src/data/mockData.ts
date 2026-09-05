@@ -66,10 +66,10 @@ export const featuredProducts: Product[] = [
 ];
 
 export const exploreCategories = [
-  { name: 'Fresh Vegetables', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Vegetables' },
-  { name: 'Fresh Fruits', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Fruits' },
-  { name: 'Frozen Items', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Frozen' },
-  { name: 'Rice & Grains', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Rice' },
-  { name: 'Snacks', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Snacks' },
-  { name: 'Household', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Household' },
+  { name: 'Fresh Vegetables', image: '/images/explore_vegetables.jpg' },
+  { name: 'Fresh Fruits', image: '/images/explore_fruits.jpg' },
+  { name: 'Frozen Items', image: '/images/explore_frozen.jpg' },
+  { name: 'Rice & Grains', image: '/images/explore_rice.jpg' },
+  { name: 'Snacks', image: '/images/explore_snacks.jpg' },
+  { name: 'Household', image: '/images/explore_household.jpg' },
 ];
