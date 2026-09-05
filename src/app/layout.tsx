@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 pb-16 md:pb-0`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 pb-24 md:pb-0 overflow-x-hidden`}
       >
         <AuthProvider>
           <WishlistProvider>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lock } from 'lucide-react';
+import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lock, Home, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -160,34 +160,34 @@ export default function Header() {
       </div>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 flex justify-around items-center py-2 px-1 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-        <Link href="/" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/' ? 'text-primary' : 'text-gray-500'}`}>
-          <div className="w-6 h-6 flex justify-center"><ShoppingCart size={22} /></div>
+      <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md border border-gray-200/50 rounded-2xl z-50 flex justify-around items-center py-2.5 px-2 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <Link href="/" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+          <div className="w-6 h-6 flex justify-center"><Home size={22} strokeWidth={pathname === '/' ? 2.5 : 2} /></div>
           <span className="text-[10px] font-medium">Home</span>
         </Link>
-        <Link href="/search" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/search' ? 'text-primary' : 'text-gray-500'}`}>
-          <div className="w-6 h-6 flex justify-center"><Search size={22} /></div>
+        <Link href="/search" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/search' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+          <div className="w-6 h-6 flex justify-center"><Search size={22} strokeWidth={pathname === '/search' ? 2.5 : 2} /></div>
           <span className="text-[10px] font-medium">Search</span>
         </Link>
         <button 
           onClick={() => setIsCartOpen(true)}
-          className="flex flex-col items-center gap-1 p-2 text-gray-500 relative"
+          className="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 transition-colors relative"
         >
           <div className="relative w-6 h-6 flex justify-center">
-            <ShoppingCart size={22} />
+            <ShoppingBag size={22} strokeWidth={2} />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+              <span className="absolute -top-1 -right-1.5 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">
                 {cartCount}
               </span>
             )}
           </div>
           <span className="text-[10px] font-medium">Cart</span>
         </button>
-        <Link href="/wishlist" className={`flex flex-col items-center gap-1 p-2 relative ${pathname === '/wishlist' ? 'text-primary' : 'text-gray-500'}`}>
+        <Link href="/wishlist" className={`flex flex-col items-center gap-1 p-2 relative ${pathname === '/wishlist' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
           <div className="relative w-6 h-6 flex justify-center">
-            <Heart size={22} />
+            <Heart size={22} strokeWidth={pathname === '/wishlist' ? 2.5 : 2} />
             {wishlistCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+              <span className="absolute -top-1 -right-1.5 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">
                 {wishlistCount}
               </span>
             )}
@@ -195,16 +195,16 @@ export default function Header() {
           <span className="text-[10px] font-medium">Wishlist</span>
         </Link>
         {isAuthenticated ? (
-          <Link href="/profile" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/profile' ? 'text-primary' : 'text-gray-500'}`}>
-            <div className="w-6 h-6 flex justify-center"><User size={22} /></div>
+          <Link href="/profile" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/profile' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+            <div className="w-6 h-6 flex justify-center"><User size={22} strokeWidth={pathname === '/profile' ? 2.5 : 2} /></div>
             <span className="text-[10px] font-medium">Profile</span>
           </Link>
         ) : (
           <button 
             onClick={() => setIsAuthOpen(true)}
-            className="flex flex-col items-center gap-1 p-2 text-gray-500"
+            className="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 transition-colors"
           >
-            <div className="w-6 h-6 flex justify-center"><User size={22} /></div>
+            <div className="w-6 h-6 flex justify-center"><User size={22} strokeWidth={2} /></div>
             <span className="text-[10px] font-medium">Login</span>
           </button>
         )}
