@@ -25,7 +25,6 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <ExploreMore />
-        <PromoBanners />
         
         <div className="space-y-4 py-8">
           <ProductRow title="Featured Products" categorySlug="all" products={bestSellers} icon={<Star size={24} />} />
