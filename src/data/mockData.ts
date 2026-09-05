@@ -19,7 +19,7 @@ export const featuredProducts: Product[] = [
     name: 'Hilsa Fish (Frozen)',
     price: 12.99,
     weight: '(€/kg)',
-    image: 'https://placehold.co/400x400/e2e8f0/475569?text=Hilsa+Fish',
+    image: '/images/product_hilsa.jpg',
     category: 'Frozen Fish',
     isBestSeller: true,
   },
@@ -28,7 +28,7 @@ export const featuredProducts: Product[] = [
     name: 'Teer Aatar Rice',
     price: 14.99,
     weight: '(5kg)',
-    image: 'https://placehold.co/400x400/e2e8f0/475569?text=Teer+Rice',
+    image: '/images/product_rice.jpg',
     category: 'Rice & Grains',
   },
   {
@@ -36,7 +36,7 @@ export const featuredProducts: Product[] = [
     name: 'Fortune Soybean Oil',
     price: 3.99,
     weight: '(1L)',
-    image: 'https://placehold.co/400x400/e2e8f0/475569?text=Soybean+Oil',
+    image: '/images/product_oil.jpg',
     category: 'Household',
   },
   {
@@ -44,7 +44,7 @@ export const featuredProducts: Product[] = [
     name: 'Teer Tea',
     price: 2.99,
     weight: '(200g)',
-    image: 'https://placehold.co/400x400/e2e8f0/475569?text=Teer+Tea',
+    image: '/images/product_tea.jpg',
     category: 'Beverages',
   },
   {
@@ -52,7 +52,7 @@ export const featuredProducts: Product[] = [
     name: 'Britannia Marie Gold',
     price: 1.99,
     weight: '(250g)',
-    image: 'https://placehold.co/400x400/e2e8f0/475569?text=Marie+Gold',
+    image: '/images/product_biscuits.jpg',
     category: 'Snacks & Biscuits',
   },
   {
@@ -60,7 +60,7 @@ export const featuredProducts: Product[] = [
     name: 'PRAN Garam Masala',
     price: 2.49,
     weight: '(100g)',
-    image: 'https://placehold.co/400x400/e2e8f0/475569?text=Garam+Masala',
+    image: '/images/product_masala.jpg',
     category: 'Spices & Masala',
   },
 ];

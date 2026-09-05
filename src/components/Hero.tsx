@@ -34,9 +34,9 @@ export default function Hero() {
         {/* Placeholder for the basket image */}
         <div className="hidden md:block w-1/2 relative h-[400px]">
           <img 
-            src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop" 
+            src="/images/hero_banner_basket.jpg" 
             alt="Groceries" 
-            className="w-full h-full object-contain drop-shadow-2xl translate-y-8"
+            className="w-full h-full object-cover rounded-xl shadow-2xl"
           />
         </div>
       </div>
