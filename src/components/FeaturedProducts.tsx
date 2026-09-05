@@ -2,12 +2,14 @@
 
 import React from 'react';
 import { featuredProducts } from '../data/mockData';
-import { ShoppingCart, Leaf, ArrowRight } from 'lucide-react';
+import { ShoppingCart, Leaf, ArrowRight, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 import Link from 'next/link';
 
 export default function FeaturedProducts() {
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-10">
@@ -32,6 +34,12 @@ export default function FeaturedProducts() {
                 Best Seller
               </span>
             )}
+            <button 
+              onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
+              className="absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm hover:shadow-md hover:text-primary transition z-10"
+            >
+              <Heart size={16} className={isInWishlist(product.id) ? "fill-primary text-primary" : "text-gray-400"} />
+            </button>
             <Link href={`/product/${product.id}`} className="h-40 w-full relative mb-4 block">
               <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
             </Link>

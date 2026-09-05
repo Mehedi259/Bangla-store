@@ -9,19 +9,17 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import Link from 'next/link';
 
-export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const unwrappedParams = React.use(params);
+export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-  const decodedCategoryName = decodeURIComponent(unwrappedParams.slug);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/products?category=${unwrappedParams.slug}`);
+        const res = await fetch(`/api/products`);
         if (res.ok) {
           const data = await res.json();
           setProducts(data);
@@ -34,7 +32,7 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
     };
 
     fetchProducts();
-  }, [unwrappedParams.slug]);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FAFB]">
@@ -43,8 +41,8 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-8">
           <Link href="/" className="text-sm text-gray-500 hover:text-primary mb-2 inline-block">← Back to Home</Link>
-          <h1 className="text-3xl font-bold text-gray-800 capitalize">{decodedCategoryName}</h1>
-          <p className="text-gray-500 mt-2">Showing all available products in {decodedCategoryName}</p>
+          <h1 className="text-3xl font-bold text-gray-800 capitalize">All Products</h1>
+          <p className="text-gray-500 mt-2">Showing all available products in the store</p>
         </div>
 
         {loading ? (
@@ -86,8 +84,8 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
           </div>
         ) : (
           <div className="bg-white p-12 text-center rounded-xl shadow-sm border border-gray-100">
-            <h2 className="text-xl font-medium text-gray-700">No products found in this category.</h2>
-            <Link href="/" className="text-primary hover:underline mt-4 inline-block font-medium">Continue Shopping</Link>
+            <h2 className="text-xl font-medium text-gray-700">No products found.</h2>
+            <Link href="/" className="text-primary hover:underline mt-4 inline-block font-medium">Return Home</Link>
           </div>
         )}
       </main>

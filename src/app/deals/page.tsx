@@ -4,27 +4,26 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Product } from '@/types';
-import { ShoppingCart, Heart } from 'lucide-react';
+import { ShoppingCart, Heart, Tag } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import Link from 'next/link';
 
-export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const unwrappedParams = React.use(params);
+export default function DealsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-  const decodedCategoryName = decodeURIComponent(unwrappedParams.slug);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/products?category=${unwrappedParams.slug}`);
+        const res = await fetch(`/api/products`);
         if (res.ok) {
           const data = await res.json();
-          setProducts(data);
+          // For deals, we simulate by filtering best sellers or just showing all items but we'll show best sellers here
+          setProducts(data.filter((p: Product) => p.isBestSeller));
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -34,7 +33,7 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
     };
 
     fetchProducts();
-  }, [unwrappedParams.slug]);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FAFB]">
@@ -43,8 +42,10 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-8">
           <Link href="/" className="text-sm text-gray-500 hover:text-primary mb-2 inline-block">← Back to Home</Link>
-          <h1 className="text-3xl font-bold text-gray-800 capitalize">{decodedCategoryName}</h1>
-          <p className="text-gray-500 mt-2">Showing all available products in {decodedCategoryName}</p>
+          <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+            <Tag className="text-primary fill-primary" /> Special Deals
+          </h1>
+          <p className="text-gray-500 mt-2">Enjoy discounts on our best-selling products!</p>
         </div>
 
         {loading ? (
@@ -55,13 +56,16 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {products.map((product) => (
               <div key={product.id} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm hover:shadow-md transition flex flex-col relative group">
+                <span className="absolute top-2 left-0 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-r-md z-10">
+                  Sale
+                </span>
                 <button 
                   onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
                   className="absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm hover:shadow-md hover:text-primary transition z-10"
                 >
                   <Heart size={16} className={isInWishlist(product.id) ? "fill-primary text-primary" : "text-gray-400"} />
                 </button>
-                <Link href={`/product/${product.id}`} className="block h-40 w-full relative mb-4">
+                <Link href={`/product/${product.id}`} className="block h-40 w-full relative mb-4 mt-2">
                   <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
                 </Link>
                 <div className="flex-1 flex flex-col justify-between">
@@ -72,7 +76,10 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
                     <span className="text-xs text-gray-500">{product.weight}</span>
                   </div>
                   <div className="mt-4 space-y-3">
-                    <div className="font-bold text-lg">€{product.price.toFixed(2)}</div>
+                    <div className="font-bold text-lg">
+                      <span className="text-gray-400 line-through text-sm mr-2">€{(product.price * 1.2).toFixed(2)}</span>
+                      €{product.price.toFixed(2)}
+                    </div>
                     <button 
                       onClick={() => addToCart(product)}
                       className="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 rounded-md flex items-center justify-center gap-2 transition text-sm"
@@ -86,8 +93,8 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
           </div>
         ) : (
           <div className="bg-white p-12 text-center rounded-xl shadow-sm border border-gray-100">
-            <h2 className="text-xl font-medium text-gray-700">No products found in this category.</h2>
-            <Link href="/" className="text-primary hover:underline mt-4 inline-block font-medium">Continue Shopping</Link>
+            <h2 className="text-xl font-medium text-gray-700">No active deals right now.</h2>
+            <Link href="/shop" className="text-primary hover:underline mt-4 inline-block font-medium">Browse All Products</Link>
           </div>
         )}
       </main>

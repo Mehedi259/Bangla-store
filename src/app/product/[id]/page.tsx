@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { Product } from '@/types';
 import { ShoppingCart, Heart, Share2, ShieldCheck, Truck } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import Link from 'next/link';
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
@@ -13,6 +14,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -103,8 +105,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   >
                     <ShoppingCart size={20} /> Add to Cart
                   </button>
-                  <button className="p-3 border border-gray-300 rounded-lg text-gray-500 hover:text-red-500 hover:border-red-500 transition">
-                    <Heart size={20} />
+                  <button 
+                    onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
+                    className="p-3 border border-gray-300 rounded-lg transition hover:border-primary"
+                  >
+                    <Heart size={20} className={isInWishlist(product.id) ? "fill-primary text-primary" : "text-gray-500"} />
                   </button>
                   <button className="p-3 border border-gray-300 rounded-lg text-gray-500 hover:text-blue-500 hover:border-blue-500 transition">
                     <Share2 size={20} />

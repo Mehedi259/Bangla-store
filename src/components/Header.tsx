@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lock } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useWishlist } from '../context/WishlistContext';
 import { categories } from '../data/mockData';
 import CartDrawer from './CartDrawer';
 import AuthModal from './AuthModal';
@@ -11,12 +12,14 @@ import Link from 'next/link';
 
 export default function Header() {
   const { cartCount, cartTotal } = useCart();
+  const { wishlistCount } = useWishlist();
   const { isAuthenticated, user } = useAuth();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
   return (
-    <header className="w-full flex flex-col">
+    <header className="w-full flex flex-col sticky top-0 z-40 bg-white shadow-sm">
       {/* Top Bar */}
       <div className="bg-primary-dark text-white text-xs py-2 px-4 flex justify-between items-center hidden md:flex">
         <div className="flex space-x-6">
@@ -74,10 +77,17 @@ export default function Header() {
               <span className="text-sm font-medium">Login / Register</span>
             </div>
           )}
-          <div className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition">
-            <Heart size={20} />
+          <Link href="/wishlist" className="hidden md:flex items-center gap-2 cursor-pointer relative hover:text-primary transition">
+            <div className="relative">
+              <Heart size={20} />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                  {wishlistCount}
+                </span>
+              )}
+            </div>
             <span className="text-sm font-medium">Wishlist</span>
-          </div>
+          </Link>
           <div 
             className="flex items-center gap-2 cursor-pointer relative hover:text-primary transition"
             onClick={() => setIsCartOpen(true)}
@@ -96,23 +106,39 @@ export default function Header() {
       </div>
 
       {/* Navigation */}
-      <div className="bg-white py-3 px-4 md:px-8 flex items-center shadow-sm">
-        <button className="bg-primary text-white px-6 py-2 rounded-md flex items-center gap-2 font-medium hover:bg-primary-dark transition">
+      <div className="bg-white py-3 px-4 md:px-8 flex items-center shadow-sm relative">
+        <button 
+          onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
+          className="bg-primary text-white px-6 py-2 rounded-md flex items-center gap-2 font-medium hover:bg-primary-dark transition relative"
+        >
           <Menu size={20} />
           All Categories
         </button>
+
+        {isCategoryDropdownOpen && (
+          <div className="absolute top-full left-4 md:left-8 w-64 bg-white border border-gray-100 shadow-xl rounded-b-lg z-50 py-2">
+            {categories.map((cat) => (
+              <Link 
+                key={cat.id} 
+                href={`/category/${cat.name.toLowerCase()}`}
+                onClick={() => setIsCategoryDropdownOpen(false)}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition"
+              >
+                {cat.name}
+              </Link>
+            ))}
+          </div>
+        )}
         
         <nav className="hidden lg:flex items-center ml-8 space-x-6 text-sm font-semibold text-gray-700">
-          <a href="#" className="text-primary border-b-2 border-primary pb-1">Home</a>
-          <a href="#" className="hover:text-primary transition">Shop</a>
+          <Link href="/" className="hover:text-primary transition">Home</Link>
+          <Link href="/shop" className="hover:text-primary transition">Shop</Link>
           {categories.slice(0, 6).map((cat) => (
-            <a href="#" key={cat.id} className="hover:text-primary transition flex items-center gap-1">
+            <Link href={`/category/${cat.name.toLowerCase()}`} key={cat.id} className="hover:text-primary transition flex items-center gap-1">
               {cat.name}
-            </a>
+            </Link>
           ))}
-          <a href="#" className="flex items-center gap-1 hover:text-primary transition">
-            Deals
-          </a>
+          <Link href="/deals" className="flex items-center gap-1 hover:text-primary transition">Deals</Link>
         </nav>
       </div>
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
