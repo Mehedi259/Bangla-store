@@ -4,6 +4,7 @@ import React from 'react';
 import { featuredProducts } from '../data/mockData';
 import { ShoppingCart, Leaf, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import Link from 'next/link';
 
 export default function FeaturedProducts() {
   const { addToCart } = useCart();
@@ -31,12 +32,14 @@ export default function FeaturedProducts() {
                 Best Seller
               </span>
             )}
-            <div className="h-40 w-full relative mb-4">
+            <Link href={`/product/${product.id}`} className="h-40 w-full relative mb-4 block">
               <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
-            </div>
+            </Link>
             <div className="flex-1 flex flex-col justify-between">
               <div>
-                <h3 className="font-semibold text-gray-800 text-sm leading-tight mb-1">{product.name}</h3>
+                <Link href={`/product/${product.id}`} className="hover:text-primary transition">
+                  <h3 className="font-semibold text-gray-800 text-sm leading-tight mb-1">{product.name}</h3>
+                </Link>
                 <span className="text-xs text-gray-500">{product.weight}</span>
               </div>
               <div className="mt-4 space-y-3">

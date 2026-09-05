@@ -3,6 +3,7 @@
 import React from 'react';
 import { categories } from '../data/mockData';
 import * as Icons from 'lucide-react';
+import Link from 'next/link';
 
 export default function CategoryCarousel() {
   return (
@@ -16,7 +17,8 @@ export default function CategoryCarousel() {
         {categories.map((cat) => {
           const IconComponent = (Icons as any)[cat.icon] || Icons.HelpCircle;
           return (
-            <div 
+            <Link 
+              href={`/category/${cat.name.toLowerCase()}`}
               key={cat.id} 
               className="flex flex-col items-center min-w-[100px] cursor-pointer group"
             >
@@ -25,7 +27,7 @@ export default function CategoryCarousel() {
                 <IconComponent className="text-primary group-hover:scale-110 transition duration-300" size={32} />
               </div>
               <span className="text-xs font-semibold text-gray-700 text-center">{cat.name}</span>
-            </div>
+            </Link>
           );
         })}
       </div>

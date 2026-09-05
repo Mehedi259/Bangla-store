@@ -1,12 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lock } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { categories } from '../data/mockData';
+import CartDrawer from './CartDrawer';
+import AuthModal from './AuthModal';
+import Link from 'next/link';
 
 export default function Header() {
   const { cartCount, cartTotal } = useCart();
+  const { isAuthenticated, user } = useAuth();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   return (
     <header className="w-full flex flex-col">
@@ -37,28 +44,44 @@ export default function Header() {
         </div>
 
         {/* Search */}
-        <div className="hidden md:flex flex-1 max-w-xl mx-8 relative">
+        <form action="/search" className="hidden md:flex flex-1 max-w-xl mx-8 relative">
           <input
             type="text"
+            name="q"
             placeholder="Search for products, brands..."
             className="w-full border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-primary"
           />
-          <button className="bg-primary text-white px-6 rounded-r-md hover:bg-primary-dark transition">
+          <button type="submit" className="bg-primary text-white px-6 rounded-r-md hover:bg-primary-dark transition">
             <Search size={20} />
           </button>
-        </div>
+        </form>
 
         {/* Icons */}
         <div className="flex items-center space-x-6 text-gray-700">
-          <div className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition">
-            <User size={20} />
-            <span className="text-sm font-medium">Login / Register</span>
-          </div>
+          {isAuthenticated ? (
+            <Link href="/profile" className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition">
+              <div className="bg-primary/10 text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">
+                {user?.name.charAt(0).toUpperCase()}
+              </div>
+              <span className="text-sm font-medium">{user?.name}</span>
+            </Link>
+          ) : (
+            <div 
+              onClick={() => setIsAuthOpen(true)}
+              className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition"
+            >
+              <User size={20} />
+              <span className="text-sm font-medium">Login / Register</span>
+            </div>
+          )}
           <div className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition">
             <Heart size={20} />
             <span className="text-sm font-medium">Wishlist</span>
           </div>
-          <div className="flex items-center gap-2 cursor-pointer relative hover:text-primary transition">
+          <div 
+            className="flex items-center gap-2 cursor-pointer relative hover:text-primary transition"
+            onClick={() => setIsCartOpen(true)}
+          >
             <div className="relative">
               <ShoppingCart size={24} />
               {cartCount > 0 && (
@@ -92,6 +115,8 @@ export default function Header() {
           </a>
         </nav>
       </div>
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </header>
   );
 }

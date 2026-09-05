@@ -3,6 +3,7 @@
 import React from 'react';
 import { exploreCategories } from '../data/mockData';
 import { Leaf } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ExploreMore() {
   return (
@@ -17,15 +18,15 @@ export default function ExploreMore() {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {exploreCategories.map((item, index) => (
-          <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer group border border-gray-100">
+          <Link href={`/category/${item.name.toLowerCase()}`} key={index} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer group border border-gray-100 block">
             <div className="h-32 w-full overflow-hidden">
               <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="p-3 text-center">
               <h4 className="font-bold text-gray-800 text-sm mb-1">{item.name}</h4>
-              <button className="text-xs text-gray-500 hover:text-primary transition">Shop Now →</button>
+              <span className="text-xs text-gray-500 group-hover:text-primary transition inline-block">Shop Now →</span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
