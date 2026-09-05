@@ -21,7 +21,7 @@ export default function Header() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
   return (
-    <header className="w-full flex flex-col sticky top-0 z-40 bg-white shadow-sm">
+    <header className="w-full flex flex-col relative md:sticky top-0 z-40 bg-white shadow-sm">
       {/* Top Bar */}
       <div className="bg-primary-dark text-white text-xs py-2 px-4 flex justify-between items-center hidden md:flex">
         <div className="flex space-x-6">
