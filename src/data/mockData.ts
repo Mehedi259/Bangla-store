@@ -67,10 +67,10 @@ export const featuredProducts: Product[] = [
   },
   
   // New Snacks
-  { id: 'p7', name: 'PRAN Potato Crackers', price: 1.20, weight: '(50g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=PRAN+Crackers', category: 'Snacks & Biscuits' },
+  { id: 'p7', name: 'PRAN Potato Crackers', price: 1.20, weight: '(50g)', image: '/images/pran_crackers.jpg', category: 'Snacks & Biscuits' },
   { id: 'p8', name: 'PRAN Chanachur', price: 1.50, weight: '(150g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=PRAN+Chanachur', category: 'Snacks & Biscuits' },
-  { id: 'p9', name: 'Square Potato Chips', price: 1.10, weight: '(45g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Square+Chips', category: 'Snacks & Biscuits' },
-  { id: 'p10', name: 'Square Ruchi Chanachur', price: 1.80, weight: '(200g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Ruchi+Chanachur', category: 'Snacks & Biscuits' },
+  { id: 'p9', name: 'Square Potato Chips', price: 1.10, weight: '(45g)', image: '/images/square_chips.jpg', category: 'Snacks & Biscuits' },
+  { id: 'p10', name: 'Square Ruchi Chanachur', price: 1.80, weight: '(200g)', image: '/images/ruchi_chanachur.jpg', category: 'Snacks & Biscuits' },
   { id: 'p11', name: 'Puffed Rice (Muri)', price: 2.50, weight: '(500g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Muri', category: 'Snacks & Biscuits' },
   { id: 'p12', name: 'Mango Achar', price: 3.50, weight: '(400g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Achar', category: 'Spices & Masala' },
   { id: 'p13', name: 'Dried Fish (Shutki)', price: 5.99, weight: '(100g)', image: 'https://placehold.co/400x400/e2e8f0/475569?text=Shutki', category: 'Frozen Fish' },
