@@ -160,7 +160,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 w-[94%] max-w-[400px] bg-white/95 backdrop-blur-md border border-gray-200/50 rounded-2xl z-50 flex justify-around items-center py-2.5 px-1 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+      <div className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-max min-w-[300px] bg-white/95 backdrop-blur-md border border-gray-200/50 rounded-full z-50 flex justify-center items-center gap-5 py-2.5 px-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
         <Link href="/" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
           <div className="w-6 h-6 flex justify-center"><Home size={22} strokeWidth={pathname === '/' ? 2.5 : 2} /></div>
           <span className="text-[10px] font-medium">Home</span>
