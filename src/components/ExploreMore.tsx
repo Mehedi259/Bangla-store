@@ -11,7 +11,7 @@ export default function ExploreMore() {
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
           <Leaf className="text-primary" size={24} />
-          Explore More
+          Shop by Category
         </h2>
         <p className="text-gray-500 text-sm mt-1">Everything You Need, All in One Place</p>
       </div>

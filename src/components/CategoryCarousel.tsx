@@ -9,7 +9,7 @@ export default function CategoryCarousel() {
   return (
     <div className="container mx-auto px-4 md:px-8 py-10">
       <h2 className="text-2xl font-bold text-center mb-8 text-gray-800 relative">
-        <span className="bg-white px-4 relative z-10">Shop by Category</span>
+        <span className="bg-[#F9FAFB] px-4 relative z-10">Explore More Categories</span>
         <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gray-200 z-0"></div>
       </h2>
       

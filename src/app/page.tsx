@@ -24,7 +24,7 @@ export default function Home() {
       
       <main className="flex-grow">
         <Hero />
-        <CategoryCarousel />
+        <ExploreMore />
         <PromoBanners />
         
         <div className="space-y-4 py-8">
@@ -37,7 +37,7 @@ export default function Home() {
         </div>
 
         <Features />
-        <ExploreMore />
+        <CategoryCarousel />
       </main>
 
       <Footer />
