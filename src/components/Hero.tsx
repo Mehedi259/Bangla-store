@@ -1,43 +1,87 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <div className="relative w-full h-[300px] md:h-[450px] bg-sky-100 flex items-center overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop" 
-          alt="Farm background" 
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-100 via-sky-100/90 to-transparent"></div>
-      </div>
+    <div className="relative w-full min-h-[500px] md:h-[600px] flex items-center overflow-hidden bg-[#032B18] border-b-8 border-white">
+      {/* Radial gradient background to match the image center light */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#09502D] via-[#032B18] to-[#032B18]"></div>
 
-      <div className="container mx-auto px-4 md:px-12 relative z-10 flex flex-col md:flex-row items-center justify-between">
-        <div className="max-w-xl space-y-6">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-primary-dark leading-tight">
-            Authentic Bangladeshi <br />
-            <span className="text-gray-800">Products in Netherlands</span>
+      <div className="container mx-auto px-4 md:px-12 relative z-10 flex flex-col md:flex-row items-center justify-between h-full pt-10 md:pt-0">
+        
+        {/* Left Content */}
+        <div className="w-full md:w-1/2 space-y-8 z-20 pb-12 md:pb-0">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 backdrop-blur-sm">
+             <div className="w-5 h-5 rounded-md overflow-hidden bg-[#84CC16] flex items-center justify-center font-bold text-[#032B18] text-[10px]">
+               BS
+             </div>
+             <span className="text-white text-sm">The best of five grocery store in Syhed</span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
+            Your One-Stop Shop <br />
+            for <span className="text-[#84CC16]">Organic Products</span>
           </h1>
-          <p className="text-lg md:text-2xl text-gray-700 font-medium">
-            Fresh • Quality • Trusted
+
+          {/* Subtitle */}
+          <p className="text-base md:text-lg text-gray-300 font-medium max-w-md leading-relaxed">
+            Fresh, local, Delivered to your doorstep. We care about what goes into your kitchen for your family and your health.
           </p>
-          <button className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-md transition flex items-center gap-2">
-            Shop Now
-            <ArrowRight size={20} />
-          </button>
+
+          {/* Buttons */}
+          <div className="flex items-center gap-8 pt-4">
+            <button className="bg-[#84CC16] hover:bg-[#65A30D] text-[#032B18] font-bold py-3.5 px-8 rounded-full transition shadow-lg shadow-[#84CC16]/20">
+              Shop Now
+            </button>
+            <Link href="/shop" className="text-white hover:text-[#84CC16] transition font-medium border-b border-[#84CC16] pb-0.5">
+              View All Products
+            </Link>
+          </div>
+
+          {/* Customers Avatar Group */}
+          <div className="flex items-center gap-3 pt-6 bg-white/5 w-max px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+             <div className="flex -space-x-3">
+                <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-[#032B18] overflow-hidden">
+                  <img src="https://i.pravatar.cc/100?img=1" alt="Customer" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-8 h-8 rounded-full bg-gray-400 border-2 border-[#032B18] overflow-hidden">
+                  <img src="https://i.pravatar.cc/100?img=2" alt="Customer" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-8 h-8 rounded-full bg-gray-500 border-2 border-[#032B18] overflow-hidden">
+                  <img src="https://i.pravatar.cc/100?img=3" alt="Customer" className="w-full h-full object-cover" />
+                </div>
+             </div>
+             <div className="flex flex-col justify-center">
+               <span className="text-white font-bold text-sm leading-tight">209 +</span>
+               <div className="flex gap-1 mt-0.5">
+                 {[1,2,3,4,5].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#84CC16]"></div>)}
+               </div>
+             </div>
+          </div>
         </div>
         
-        {/* Placeholder for the basket image */}
-        <div className="hidden md:block w-1/2 relative h-[400px]">
+        {/* Right Content - Image and Badges */}
+        <div className="w-full md:w-1/2 relative h-[400px] md:h-[600px] z-10 flex items-end justify-center md:justify-end">
           <img 
-            src="/images/hero_banner_basket.jpg" 
-            alt="Groceries" 
-            className="w-full h-full object-cover rounded-xl shadow-2xl"
+            src="/images/old man with vagetables.png" 
+            alt="Farmer with organic vegetables" 
+            className="h-[110%] w-auto object-contain object-bottom md:absolute md:bottom-0 md:right-10 lg:right-20"
           />
+
+          {/* Badges / Pointers (Hidden on mobile for cleaner look) */}
+          <div className="hidden md:flex absolute top-[20%] right-0 lg:-right-10 items-center gap-2">
+            <div className="w-12 border-b border-[#84CC16]/50 border-dashed"></div>
+            <div className="text-white/80 text-sm font-medium">Bed a Cernhisly<br/><span className="text-white">Bistnered</span></div>
+          </div>
+          
+          <div className="hidden md:flex absolute top-[40%] right-0 lg:-right-10 items-center gap-2">
+            <div className="w-12 border-b border-[#84CC16]/50 border-dashed"></div>
+            <div className="text-white/80 text-sm font-medium">Frait Customer<br/><span className="text-white">Support</span></div>
+          </div>
         </div>
       </div>
     </div>

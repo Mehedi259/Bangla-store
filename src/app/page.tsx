@@ -24,7 +24,7 @@ export default function Home() {
       
       <main className="flex-grow">
         <Hero />
-        <ExploreMore />
+        <CategoryCarousel />
         
         <div className="space-y-4 py-8">
           <ProductRow title="Featured Products" categorySlug="all" products={bestSellers} icon={<Star size={24} />} />
@@ -36,7 +36,7 @@ export default function Home() {
         </div>
 
         <Features />
-        <CategoryCarousel />
+        <ExploreMore />
       </main>
 
       <Footer />

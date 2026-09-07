@@ -21,153 +21,131 @@ export default function Header() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
   return (
-    <header className="w-full flex flex-col relative md:sticky top-0 z-40 bg-white shadow-sm">
-      {/* Top Bar */}
-      <div className="bg-primary-dark text-white text-xs py-2 px-4 flex justify-between items-center hidden md:flex">
-        <div className="flex space-x-6">
-          <span className="flex items-center gap-2"><MapPin size={14} /> Serving All Over Netherlands</span>
-          <span className="flex items-center gap-2"><Truck size={14} /> Fast & Reliable Delivery</span>
-          <span className="flex items-center gap-2"><Lock size={14} /> Secure Payment</span>
-        </div>
-        <div className="flex space-x-4">
-          <span className="cursor-pointer">English | Nederlands</span>
-        </div>
-      </div>
-
-      {/* Main Header */}
-      <div className="bg-white py-4 px-4 md:px-8 flex justify-between items-center border-b">
+    <header className="w-full flex flex-col relative md:sticky top-0 z-40 bg-[#032B18] text-white">
+      {/* Desktop Main Header */}
+      <div className="py-5 px-4 md:px-8 flex justify-between items-center max-w-7xl mx-auto w-full">
         {/* Logo */}
-        <div className="flex items-center gap-2 text-primary font-bold text-2xl">
-          <div className="bg-primary text-white p-2 rounded-lg">
-             {/* Simple cart icon for logo */}
-             <ShoppingCart size={28} />
-          </div>
-          <div className="flex flex-col">
-            <span className="leading-tight">Bangla Store</span>
-            <span className="text-xs text-gray-500 font-normal">Your Bangladeshi Grocery & More</span>
-          </div>
-        </div>
+        <Link href="/" className="flex items-center gap-2 text-white font-bold text-2xl">
+          <ShoppingCart className="text-[#84CC16]" size={28} />
+          <span className="leading-none tracking-tight">BanglaStore</span>
+        </Link>
 
-        {/* Search */}
-        <form action="/search" className="hidden md:flex flex-1 max-w-xl mx-8 relative">
+        {/* Desktop Search */}
+        <form action="/search" className="hidden lg:flex flex-1 max-w-2xl mx-12 bg-[#064027] rounded-full px-2 py-1 items-center border border-white/10 focus-within:border-[#84CC16]/50 transition-colors">
+          <div 
+            className="flex items-center px-4 border-r border-white/20 cursor-pointer group"
+            onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
+          >
+            <span className="text-sm text-gray-300 mr-2 group-hover:text-white transition">All categories</span>
+            <ChevronDown size={14} className="text-gray-300 group-hover:text-white transition" />
+          </div>
+          {isCategoryDropdownOpen && (
+            <div className="absolute top-16 left-[30%] w-64 bg-white border border-gray-100 shadow-xl rounded-lg z-50 py-2 text-gray-800">
+              {categories.map((cat) => (
+                <Link 
+                  key={cat.id} 
+                  href={`/category/${cat.name.toLowerCase()}`}
+                  onClick={() => setIsCategoryDropdownOpen(false)}
+                  className="block px-4 py-2 text-sm hover:bg-gray-50 hover:text-primary transition"
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </div>
+          )}
           <input
             type="text"
             name="q"
-            placeholder="Search for products, brands..."
-            className="w-full border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-primary"
+            placeholder="Search for products..."
+            className="bg-transparent flex-1 px-4 text-white placeholder-gray-400 focus:outline-none text-sm"
           />
-          <button type="submit" className="bg-primary text-white px-6 rounded-r-md hover:bg-primary-dark transition">
+          <button type="submit" className="p-2 text-white/80 hover:text-white transition">
             <Search size={20} />
           </button>
         </form>
 
-        {/* Icons */}
-        <div className="flex items-center space-x-6 text-gray-700">
-          {isAuthenticated ? (
-            <Link href="/profile" className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition">
-              <div className="bg-primary/10 text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">
-                {user?.name.charAt(0).toUpperCase()}
-              </div>
-              <span className="text-sm font-medium">{user?.name}</span>
-            </Link>
-          ) : (
-            <div 
-              onClick={() => setIsAuthOpen(true)}
-              className="hidden md:flex items-center gap-2 cursor-pointer hover:text-primary transition"
-            >
-              <User size={20} />
-              <span className="text-sm font-medium">Login / Register</span>
-            </div>
-          )}
-          <Link href="/wishlist" className="hidden md:flex items-center gap-2 cursor-pointer relative hover:text-primary transition">
-            <div className="relative">
-              <Heart size={20} />
-              {wishlistCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
-                  {wishlistCount}
-                </span>
-              )}
-            </div>
-            <span className="text-sm font-medium">Wishlist</span>
+        {/* Desktop Icons */}
+        <div className="hidden md:flex items-center space-x-6 text-white/90">
+          <Link href="/wishlist" className="relative hover:text-[#84CC16] transition cursor-pointer">
+            <Heart size={22} />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#84CC16] text-[#032B18] text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                {wishlistCount}
+              </span>
+            )}
           </Link>
           <div 
-            className="flex items-center gap-2 cursor-pointer relative hover:text-primary transition"
+            className="relative hover:text-[#84CC16] transition cursor-pointer"
             onClick={() => setIsCartOpen(true)}
           >
-            <div className="relative">
-              <ShoppingCart size={24} />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
-                  {cartCount}
-                </span>
-              )}
+            <ShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#84CC16] text-[#032B18] text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                {cartCount}
+              </span>
+            )}
+          </div>
+          {isAuthenticated ? (
+            <Link href="/profile" className="hover:text-[#84CC16] transition cursor-pointer flex items-center gap-2">
+              <User size={22} />
+            </Link>
+          ) : (
+            <div onClick={() => setIsAuthOpen(true)} className="hover:text-[#84CC16] transition cursor-pointer">
+              <User size={22} />
             </div>
-            <span className="font-bold text-lg ml-2">€{cartTotal.toFixed(2)}</span>
+          )}
+        </div>
+
+        {/* Mobile top-right icons (cart & search toggle) */}
+        <div className="flex md:hidden items-center gap-4">
+          <div onClick={() => setIsCartOpen(true)} className="relative text-white">
+            <ShoppingCart size={24} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#84CC16] text-[#032B18] text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                {cartCount}
+              </span>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Navigation */}
-      <div className="bg-white py-3 px-4 md:px-8 flex items-center shadow-sm relative">
-        <button 
-          onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
-          className="bg-primary text-white px-6 py-2 rounded-md flex items-center gap-2 font-medium hover:bg-primary-dark transition relative"
-        >
-          <Menu size={20} />
-          All Categories
-        </button>
-
-        {isCategoryDropdownOpen && (
-          <div className="absolute top-full left-4 md:left-8 w-64 bg-white border border-gray-100 shadow-xl rounded-b-lg z-50 py-2">
-            {categories.map((cat) => (
-              <Link 
-                key={cat.id} 
-                href={`/category/${cat.name.toLowerCase()}`}
-                onClick={() => setIsCategoryDropdownOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition"
-              >
-                {cat.name}
-              </Link>
-            ))}
-          </div>
-        )}
-        
-        <nav className="hidden lg:flex items-center ml-8 space-x-6 text-sm font-semibold text-gray-700">
-          <Link href="/" className="hover:text-primary transition">Home</Link>
-          <Link href="/shop" className="hover:text-primary transition">Shop</Link>
-          {categories.slice(0, 6).map((cat) => (
-            <Link href={`/category/${cat.name.toLowerCase()}`} key={cat.id} className="hover:text-primary transition flex items-center gap-1">
-              {cat.name}
-            </Link>
-          ))}
-          <Link href="/deals" className="flex items-center gap-1 hover:text-primary transition">Deals</Link>
+      {/* Desktop Navigation Links */}
+      <div className="hidden lg:flex justify-center items-center pb-4 w-full">
+        <nav className="flex items-center space-x-8 text-sm font-medium text-gray-300">
+          <Link href="/" className={`pb-1 border-b-2 ${pathname === '/' ? 'text-white border-[#84CC16]' : 'border-transparent hover:text-white hover:border-white/30 transition'}`}>Home</Link>
+          <Link href="/shop" className={`pb-1 border-b-2 ${pathname === '/shop' ? 'text-white border-[#84CC16]' : 'border-transparent hover:text-white hover:border-white/30 transition'}`}>Shop</Link>
+          <Link href="/category/trades" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Trades</Link>
+          <Link href="/category/vegetables" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Vegetables</Link>
+          <Link href="/category/beverages" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Beverages</Link>
+          <Link href="/category/products" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Products</Link>
+          <Link href="/blog" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Blogs</Link>
         </nav>
       </div>
 
       {/* Mobile Search Bar (Only visible on mobile) */}
-      <div className="md:hidden bg-white px-4 py-2 border-b">
-        <form action="/search" className="flex w-full relative">
+      <div className="md:hidden bg-[#064027] px-4 py-3">
+        <form action="/search" className="flex w-full relative bg-white/10 rounded-lg p-1 border border-white/20 focus-within:border-[#84CC16]/50">
           <input
             type="text"
             name="q"
             placeholder="Search products..."
-            className="w-full border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-primary text-sm"
+            className="w-full bg-transparent py-1.5 px-4 focus:outline-none text-white placeholder-gray-400 text-sm"
           />
-          <button type="submit" className="bg-primary text-white px-4 rounded-r-md hover:bg-primary-dark transition flex items-center justify-center">
+          <button type="submit" className="text-white/80 px-3 hover:text-white transition flex items-center justify-center">
             <Search size={18} />
           </button>
         </form>
       </div>
 
-      {/* Mobile Bottom Navigation Bar */}
+      {/* Mobile Bottom Navigation Bar (Floating Pill) */}
       <div className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-max min-w-[300px] bg-white/95 backdrop-blur-md border border-gray-200/50 rounded-full z-50 flex justify-center items-center gap-5 py-2.5 px-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-        <Link href="/" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+        <Link href="/" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/' ? 'text-[#006838]' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
           <div className="w-6 h-6 flex justify-center"><Home size={22} strokeWidth={pathname === '/' ? 2.5 : 2} /></div>
-          <span className="text-[10px] font-medium">Home</span>
+          <span className="text-[10px] font-medium text-gray-800">Home</span>
         </Link>
-        <Link href="/search" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/search' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+        <Link href="/search" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/search' ? 'text-[#006838]' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
           <div className="w-6 h-6 flex justify-center"><Search size={22} strokeWidth={pathname === '/search' ? 2.5 : 2} /></div>
-          <span className="text-[10px] font-medium">Search</span>
+          <span className="text-[10px] font-medium text-gray-800">Search</span>
         </Link>
         <button 
           onClick={() => setIsCartOpen(true)}
@@ -181,23 +159,23 @@ export default function Header() {
               </span>
             )}
           </div>
-          <span className="text-[10px] font-medium">Cart</span>
+          <span className="text-[10px] font-medium text-gray-800">Cart</span>
         </button>
-        <Link href="/wishlist" className={`flex flex-col items-center gap-1 p-2 relative ${pathname === '/wishlist' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+        <Link href="/wishlist" className={`flex flex-col items-center gap-1 p-2 relative ${pathname === '/wishlist' ? 'text-[#006838]' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
           <div className="relative w-6 h-6 flex justify-center">
             <Heart size={22} strokeWidth={pathname === '/wishlist' ? 2.5 : 2} />
             {wishlistCount > 0 && (
-              <span className="absolute -top-1 -right-1.5 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">
+              <span className="absolute -top-1 -right-1.5 bg-[#006838] text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">
                 {wishlistCount}
               </span>
             )}
           </div>
-          <span className="text-[10px] font-medium">Wishlist</span>
+          <span className="text-[10px] font-medium text-gray-800">Wishlist</span>
         </Link>
         {isAuthenticated ? (
-          <Link href="/profile" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/profile' ? 'text-primary' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
+          <Link href="/profile" className={`flex flex-col items-center gap-1 p-2 ${pathname === '/profile' ? 'text-[#006838]' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}>
             <div className="w-6 h-6 flex justify-center"><User size={22} strokeWidth={pathname === '/profile' ? 2.5 : 2} /></div>
-            <span className="text-[10px] font-medium">Profile</span>
+            <span className="text-[10px] font-medium text-gray-800">Profile</span>
           </Link>
         ) : (
           <button 
@@ -205,10 +183,11 @@ export default function Header() {
             className="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <div className="w-6 h-6 flex justify-center"><User size={22} strokeWidth={2} /></div>
-            <span className="text-[10px] font-medium">Login</span>
+            <span className="text-[10px] font-medium text-gray-800">Login</span>
           </button>
         )}
       </div>
+      
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </header>
