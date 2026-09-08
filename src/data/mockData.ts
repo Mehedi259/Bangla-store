@@ -1,7 +1,7 @@
 import { Product, Category } from '../types';
 
 export const categories: Category[] = [
-  { id: '1', name: 'Fresh Market', icon: 'Leaf', image: '/images/icons/cat_fresh_1788834074873.jpg' },
+  { id: '1', name: 'Fresh Vegetables', icon: 'Leaf', image: '/images/icons/cat_fresh_1788834074873.jpg' },
   { id: '2', name: 'Frozen Fish', icon: 'Fish', image: '/images/icons/cat_fish_1788834089855.jpg' },
   { id: '3', name: 'Meat & Poultry', icon: 'Drumstick', image: '/images/icons/cat_meat_1788834105402.jpg' },
   { id: '4', name: 'Rice & Grains', icon: 'Wheat', image: '/images/icons/cat_rice_1788834117972.jpg' },

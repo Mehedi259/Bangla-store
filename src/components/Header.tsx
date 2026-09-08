@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lock, Home, ShoppingBag } from 'lucide-react';
+import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lock, Home, ShoppingBag, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -19,16 +19,23 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileCategoryDropdownOpen, setIsMobileCategoryDropdownOpen] = useState(false);
 
   return (
     <header className="w-full flex flex-col relative md:sticky top-0 z-40 bg-[#032B18] text-white">
       {/* Desktop Main Header */}
       <div className="py-5 px-4 md:px-8 flex justify-between items-center max-w-7xl mx-auto w-full">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 text-white font-bold text-2xl">
-          <ShoppingCart className="text-[#84CC16]" size={28} />
-          <span className="leading-none tracking-tight">BanglaStore</span>
-        </Link>
+        {/* Logo and Hamburger Menu */}
+        <div className="flex items-center gap-3">
+          <button className="md:hidden text-white hover:text-gray-200 transition" onClick={() => setIsMobileMenuOpen(true)}>
+            <Menu size={24} />
+          </button>
+          <Link href="/" className="flex items-center gap-2 text-white font-bold text-2xl">
+            <ShoppingCart className="text-[#84CC16]" size={28} />
+            <span className="leading-none tracking-tight">BanglaStore</span>
+          </Link>
+        </div>
 
         {/* Desktop Search */}
         <form action="/search" className="hidden lg:flex flex-1 max-w-2xl mx-12 bg-[#064027] rounded-full px-2 py-1 items-center border border-white/10 focus-within:border-[#84CC16]/50 transition-colors">
@@ -114,17 +121,38 @@ export default function Header() {
         <nav className="flex items-center space-x-8 text-sm font-medium text-gray-300">
           <Link href="/" className={`pb-1 border-b-2 ${pathname === '/' ? 'text-white border-[#84CC16]' : 'border-transparent hover:text-white hover:border-white/30 transition'}`}>Home</Link>
           <Link href="/shop" className={`pb-1 border-b-2 ${pathname === '/shop' ? 'text-white border-[#84CC16]' : 'border-transparent hover:text-white hover:border-white/30 transition'}`}>Shop</Link>
-          <Link href="/category/trades" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Trades</Link>
-          <Link href="/category/vegetables" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Vegetables</Link>
-          <Link href="/category/beverages" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Beverages</Link>
-          <Link href="/category/products" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Products</Link>
-          <Link href="/blog" className="pb-1 border-b-2 border-transparent hover:text-white hover:border-white/30 transition">Blogs</Link>
+          {categories.slice(0, 5).map((cat) => (
+            <Link key={cat.id} href={`/category/${cat.name.toLowerCase()}`} className={`pb-1 border-b-2 ${pathname === `/category/${cat.name.toLowerCase()}` ? 'text-white border-[#84CC16]' : 'border-transparent hover:text-white hover:border-white/30 transition'}`}>
+              {cat.name}
+            </Link>
+          ))}
         </nav>
       </div>
 
       {/* Mobile Search Bar (Only visible on mobile) */}
       <div className="md:hidden bg-[#064027] px-4 py-3">
         <form action="/search" className="flex w-full relative bg-white/10 rounded-lg p-1 border border-white/20 focus-within:border-[#84CC16]/50">
+          <div 
+            className="flex items-center px-3 border-r border-white/20 cursor-pointer group"
+            onClick={() => setIsMobileCategoryDropdownOpen(!isMobileCategoryDropdownOpen)}
+          >
+            <span className="text-xs text-gray-300 mr-1 group-hover:text-white transition">All</span>
+            <ChevronDown size={14} className="text-gray-300 group-hover:text-white transition flex-shrink-0" />
+          </div>
+          {isMobileCategoryDropdownOpen && (
+            <div className="absolute top-12 left-0 w-64 bg-white border border-gray-100 shadow-xl rounded-lg z-50 py-2 text-gray-800">
+              {categories.map((cat) => (
+                <Link 
+                  key={cat.id} 
+                  href={`/category/${cat.name.toLowerCase()}`}
+                  onClick={() => setIsMobileCategoryDropdownOpen(false)}
+                  className="block px-4 py-2 text-sm hover:bg-gray-50 hover:text-primary transition"
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </div>
+          )}
           <input
             type="text"
             name="q"
@@ -190,6 +218,47 @@ export default function Header() {
       
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+      
+      {/* Mobile Sidebar Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 flex md:hidden">
+          <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)}></div>
+          <div className="relative w-64 max-w-sm bg-white h-full shadow-xl flex flex-col">
+            <div className="flex items-center justify-between p-5 border-b border-gray-100 bg-[#032B18] text-white">
+              <span className="font-bold text-lg">Menu</span>
+              <button onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300">
+                <X size={24} />
+              </button>
+            </div>
+            <div className="overflow-y-auto flex-1 p-4 pb-20">
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wider">Main</h3>
+                  <div className="space-y-1">
+                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition font-medium">Home</Link>
+                    <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition font-medium">Shop</Link>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wider">Categories</h3>
+                  <div className="space-y-1">
+                    {categories.map((cat) => (
+                      <Link 
+                        key={cat.id} 
+                        href={`/category/${cat.name.toLowerCase()}`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block px-3 py-2.5 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-md transition font-medium"
+                      >
+                        {cat.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
