@@ -25,12 +25,12 @@ export default function CategoryCarousel() {
                 key={cat.id} 
                 className="flex flex-col items-center min-w-[120px] md:min-w-[140px] cursor-pointer group snap-center"
               >
-                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#F3F4F6] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#E5E7EB] transition-colors duration-300 relative overflow-hidden shrink-0">
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-white shadow-sm border border-gray-50 rounded-full flex items-center justify-center mb-4 group-hover:shadow-md transition-all duration-300 relative overflow-hidden shrink-0">
                   {cat.image ? (
                     <img 
                       src={cat.image} 
                       alt={cat.name} 
-                      className="w-28 h-28 md:w-36 md:h-36 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10 mix-blend-multiply"
+                      className="w-28 h-28 md:w-36 md:h-36 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10"
                     />
                   ) : (
                     <IconComponent className="text-[#032B18] group-hover:scale-110 transition-transform duration-300 relative z-10" size={56} strokeWidth={1.5} />
