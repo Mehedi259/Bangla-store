@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
   let products = featuredProducts;
 
-  if (category) {
+  if (category && category.toLowerCase() !== 'all') {
     products = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
   }
 
