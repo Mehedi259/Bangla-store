@@ -26,9 +26,17 @@ export default function CategoryCarousel() {
                 className="flex flex-col items-center min-w-[120px] md:min-w-[140px] cursor-pointer group snap-center"
               >
                 <div className="w-28 h-28 md:w-32 md:h-32 bg-[#F3F4F6] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#E5E7EB] transition-colors duration-300 relative overflow-hidden">
-                  <IconComponent className="text-[#032B18] group-hover:scale-110 transition-transform duration-300 relative z-10" size={48} strokeWidth={1.5} />
+                  {cat.image ? (
+                    <img 
+                      src={cat.image} 
+                      alt={cat.name} 
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10 drop-shadow-sm"
+                    />
+                  ) : (
+                    <IconComponent className="text-[#032B18] group-hover:scale-110 transition-transform duration-300 relative z-10" size={48} strokeWidth={1.5} />
+                  )}
                   {/* Subtle highlight ring on hover */}
-                  <div className="absolute inset-0 border-4 border-transparent group-hover:border-[#84CC16]/20 rounded-full transition-colors duration-300"></div>
+                  <div className="absolute inset-0 border-4 border-transparent group-hover:border-[#84CC16]/20 rounded-full transition-colors duration-300 pointer-events-none"></div>
                 </div>
                 <span className="font-bold text-gray-800 text-center mb-1 group-hover:text-[#032B18] transition-colors">{cat.name}</span>
                 <span className="text-xs text-gray-500 font-medium">{mockCount}+ Products</span>

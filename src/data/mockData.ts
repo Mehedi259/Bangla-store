@@ -1,16 +1,16 @@
 import { Product, Category } from '../types';
 
 export const categories: Category[] = [
-  { id: '1', name: 'Fresh Market', icon: 'Leaf' },
-  { id: '2', name: 'Frozen Fish', icon: 'Fish' },
-  { id: '3', name: 'Meat & Poultry', icon: 'Drumstick' },
-  { id: '4', name: 'Rice & Grains', icon: 'Wheat' },
-  { id: '5', name: 'Spices & Masala', icon: 'Flame' },
-  { id: '6', name: 'Snacks & Biscuits', icon: 'Cookie' },
-  { id: '7', name: 'Beverages', icon: 'CupSoda' },
-  { id: '8', name: 'Household', icon: 'Home' },
-  { id: '9', name: 'Personal Care', icon: 'Smile' },
-  { id: '10', name: 'Sweets & Desserts', icon: 'Cake' },
+  { id: '1', name: 'Fresh Market', icon: 'Leaf', image: '/images/icons/cat_fresh_1788834074873.jpg' },
+  { id: '2', name: 'Frozen Fish', icon: 'Fish', image: '/images/icons/cat_fish_1788834089855.jpg' },
+  { id: '3', name: 'Meat & Poultry', icon: 'Drumstick', image: '/images/icons/cat_meat_1788834105402.jpg' },
+  { id: '4', name: 'Rice & Grains', icon: 'Wheat', image: '/images/icons/cat_rice_1788834117972.jpg' },
+  { id: '5', name: 'Spices & Masala', icon: 'Flame', image: '/images/icons/cat_spices_1788834257393.jpg' },
+  { id: '6', name: 'Snacks & Biscuits', icon: 'Cookie', image: '/images/icons/cat_snacks_1788834274526.jpg' },
+  { id: '7', name: 'Beverages', icon: 'CupSoda', image: '/images/icons/cat_beverages_1788834286724.jpg' },
+  { id: '8', name: 'Household', icon: 'Home', image: '/images/icons/cat_household_1788834321315.jpg' },
+  { id: '9', name: 'Personal Care', icon: 'Smile', image: '/images/icons/cat_care_1788834344383.jpg' },
+  { id: '10', name: 'Sweets & Desserts', icon: 'Cake', image: '/images/icons/cat_sweets_1788834333096.jpg' },
   { id: '11', name: 'Other', icon: 'MoreHorizontal' },
 ];
 
