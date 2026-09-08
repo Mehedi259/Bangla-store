@@ -62,7 +62,7 @@ export const featuredProducts: Product[] = [
     name: 'PRAN Garam Masala',
     price: 2.49,
     weight: '(100g)',
-    image: '/images/product_masala.jpg',
+    image: '/images/PRAN Garam Masala.jpeg',
     category: 'Spices & Masala',
   },
   
@@ -72,15 +72,15 @@ export const featuredProducts: Product[] = [
   { id: 'p9', name: 'Square Potato Chips', price: 1.10, weight: '(45g)', image: '/images/square_chips.jpg', category: 'Snacks & Biscuits' },
   { id: 'p10', name: 'Square Ruchi Chanachur', price: 1.80, weight: '(200g)', image: '/images/ruchi_chanachur.jpg', category: 'Snacks & Biscuits' },
   { id: 'p11', name: 'Puffed Rice (Muri)', price: 2.50, weight: '(500g)', image: '/images/muri.jpg', category: 'Snacks & Biscuits' },
-  { id: 'p12', name: 'Mango Achar', price: 3.50, weight: '(400g)', image: '/images/mango_achar.jpg', category: 'Spices & Masala' },
-  { id: 'p13', name: 'Dried Fish (Shutki)', price: 5.99, weight: '(100g)', image: '/images/shutki.jpg', category: 'Frozen Fish' },
+  { id: 'p12', name: 'Mango Achar', price: 3.50, weight: '(400g)', image: '/images/Mango Achar.webp', category: 'Spices & Masala' },
+  { id: 'p13', name: 'Dried Fish (Shutki)', price: 5.99, weight: '(100g)', image: '/images/Dried Fish (Shutki).jpg', category: 'Frozen Fish' },
   
   // Sweets
   { id: 'p14', name: 'Kalo Jam', price: 6.50, weight: '(500g)', image: '/images/kalo_jam.jpg', category: 'Sweets & Desserts' },
   { id: 'p15', name: 'Golap Jamun', price: 6.50, weight: '(500g)', image: '/images/golap_jamun.jpg', category: 'Sweets & Desserts' },
   { id: 'p16', name: 'Chomchom', price: 7.00, weight: '(500g)', image: '/images/chomchom.jpg', category: 'Sweets & Desserts' },
   { id: 'p17', name: 'Roshmalai', price: 8.50, weight: '(500g)', image: '/images/roshmalai.jpg', category: 'Sweets & Desserts' },
-  { id: 'p18', name: 'Sweet Yogurt (Mishti Doi)', price: 4.50, weight: '(500g)', image: '/images/product_masala.jpg', category: 'Sweets & Desserts' },
+  { id: 'p18', name: 'Sweet Yogurt (Mishti Doi)', price: 4.50, weight: '(500g)', image: '/images/Sweet Yogurt (Mishti Doi).webp', category: 'Sweets & Desserts' },
 
   // Vegetables
   { id: 'p19', name: 'Pui Shak', price: 1.50, weight: '(1 Bunch)', image: '/images/pui sak.jpg', category: 'Fresh Vegetables' },
@@ -94,8 +94,8 @@ export const featuredProducts: Product[] = [
   // Radhuni Spices Collection
   { id: 'p26', name: 'Radhuni Chilli Powder', price: 2.99, weight: '(200 gm)', image: '/images/radhuni/radhuni_chilli_powder_200_gm.jpg', category: 'Spices & Masala' },
   { id: 'p27', name: 'Radhuni Chilli Powder', price: 4.99, weight: '(400 gm)', image: '/images/radhuni/radhuni_chilli_powder_400_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p28', name: 'Radhuni Turmeric Powder', price: 2.49, weight: '(200 gm)', image: '/images/radhuni/radhuni_turmeric_powder_200_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p29', name: 'Radhuni Turmeric Powder', price: 4.49, weight: '(400 gm)', image: '/images/radhuni/radhuni_turmeric_powder_400_gm.jpg', category: 'Spices & Masala' },
+  { id: 'p28', name: 'Radhuni Turmeric Powder', price: 2.49, weight: '(200 gm)', image: '/images/Radhuni Turmeric Powder.jpeg', category: 'Spices & Masala' },
+  { id: 'p29', name: 'Radhuni Turmeric Powder', price: 4.49, weight: '(400 gm)', image: '/images/Radhuni Turmeric Powder.jpeg', category: 'Spices & Masala' },
   { id: 'p30', name: 'Radhuni Coriander Powder', price: 2.29, weight: '(200 gm)', image: '/images/radhuni/radhuni_coriander_powder_200_gm.jpg', category: 'Spices & Masala' },
   { id: 'p31', name: 'Radhuni Coriander Powder', price: 4.29, weight: '(400 gm)', image: '/images/radhuni/radhuni_coriander_powder_400_gm.jpg', category: 'Spices & Masala' },
   { id: 'p32', name: 'Radhuni Cumin Powder', price: 3.49, weight: '(200 gm)', image: '/images/radhuni/radhuni_cumin_powder_200_gm.jpg', category: 'Spices & Masala' },
