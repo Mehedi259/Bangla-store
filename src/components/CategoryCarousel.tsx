@@ -14,7 +14,7 @@ export default function CategoryCarousel() {
       </div>
       
       <div className="container mx-auto px-4 md:px-8">
-        <div className="flex overflow-x-auto pb-6 gap-6 md:gap-10 md:justify-center custom-scrollbar scroll-smooth snap-x">
+        <div className="flex overflow-x-auto pb-6 gap-6 md:gap-10 custom-scrollbar scroll-smooth snap-x">
           {categories.map((cat) => {
             const IconComponent = (Icons as any)[cat.icon] || Icons.HelpCircle;
             // Mock product count for design purposes
@@ -25,15 +25,15 @@ export default function CategoryCarousel() {
                 key={cat.id} 
                 className="flex flex-col items-center min-w-[120px] md:min-w-[140px] cursor-pointer group snap-center"
               >
-                <div className="w-28 h-28 md:w-32 md:h-32 bg-[#F3F4F6] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#E5E7EB] transition-colors duration-300 relative overflow-hidden">
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-[#F3F4F6] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#E5E7EB] transition-colors duration-300 relative overflow-hidden shrink-0">
                   {cat.image ? (
                     <img 
                       src={cat.image} 
                       alt={cat.name} 
-                      className="w-24 h-24 md:w-28 md:h-28 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10 mix-blend-multiply"
+                      className="w-28 h-28 md:w-36 md:h-36 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10 mix-blend-multiply"
                     />
                   ) : (
-                    <IconComponent className="text-[#032B18] group-hover:scale-110 transition-transform duration-300 relative z-10" size={48} strokeWidth={1.5} />
+                    <IconComponent className="text-[#032B18] group-hover:scale-110 transition-transform duration-300 relative z-10" size={56} strokeWidth={1.5} />
                   )}
                   {/* Subtle highlight ring on hover */}
                   <div className="absolute inset-0 border-4 border-transparent group-hover:border-[#84CC16]/20 rounded-full transition-colors duration-300 pointer-events-none"></div>
