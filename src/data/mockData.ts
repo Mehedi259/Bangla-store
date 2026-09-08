@@ -182,8 +182,8 @@ export const featuredProducts: Product[] = [
   { id: 'p111', name: 'Boal (G)', price: 12.99, weight: '(4kg up)', image: '/images/Boal.webp', category: 'Frozen Fish' },
   { id: 'p112', name: 'Boal (G)', price: 12.99, weight: '(5kg up)', image: '/images/Boal.webp', category: 'Frozen Fish' },
   { id: 'p113', name: 'Boal (G)', price: 12.99, weight: '(6kg up)', image: '/images/Boal.webp', category: 'Frozen Fish' },
-  { id: 'p114', name: 'Fresh Coriander Leaves (Dhonya Pata)', price: 1.49, weight: '(100 gm)', image: '/images/cat_fresh_1788834074873.jpg', category: 'Fresh Vegetables' },
-  { id: 'p115', name: 'Pran Rasmalai', price: 5.99, weight: '(500 gm)', image: '/images/cat_sweets_1788834333096.jpg', category: 'Sweets & Desserts' },
+  { id: 'p114', name: 'Fresh Coriander Leaves (Dhonya Pata)', price: 1.49, weight: '(100 gm)', image: '/images/Fresh Coriander Leaves (Dhonya Pata).png', category: 'Fresh Vegetables' },
+  { id: 'p115', name: 'Pran Rasmalai', price: 5.99, weight: '(500 gm)', image: '/images/Pran Rasmalai.jpeg', category: 'Sweets & Desserts' },
 ];
 
 export const exploreCategories = [
