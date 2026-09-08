@@ -69,7 +69,7 @@ export default function Hero() {
           <img 
             src="/images/old man with vagetables.png" 
             alt="Farmer with organic vegetables" 
-            className="h-[85%] max-h-[500px] w-auto object-contain object-bottom md:absolute md:bottom-0 md:right-[15%]"
+            className="h-[100%] w-auto object-contain object-bottom md:absolute md:bottom-0 md:right-[15%]"
           />
 
           {/* Badges / Pointers (Hidden on mobile for cleaner look) */}
