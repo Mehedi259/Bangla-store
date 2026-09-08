@@ -113,13 +113,13 @@ export const featuredProducts: Product[] = [
   { id: 'p44', name: 'Radhuni Garam Masala', price: 2.6, weight: '(100 gm)', image: '/images/Radhuni Garam Masala .jpeg', category: 'Spices & Masala' },
   { id: 'p45', name: 'Radhuni Panchforan', price: 0.89, weight: '(50 gm)', image: '/images/Radhuni Panchforan .jpeg', category: 'Spices & Masala' },
   { id: 'p46', name: 'Radhuni Haleem Mix', price: 2.99, weight: '(200 gm)', image: '/images/Radhuni Haleem Mix .png', category: 'Spices & Masala' },
-  { id: 'p47', name: 'Radhuni Roast Masala', price: 1.1, weight: '(35 gm)', image: '/images/radhuni/radhuni_roast_masala_35_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p48', name: 'Radhuni Rezala Masala', price: 1.1, weight: '(32 gm)', image: '/images/radhuni/radhuni_rezala_masala_32_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p49', name: 'Radhuni Biryani Masala', price: 1.3, weight: '(40 gm)', image: '/images/radhuni/radhuni_biryani_masala_40_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p50', name: 'Radhuni Hydrabadi Biryani Masala', price: 1.4, weight: '(45 gm)', image: '/images/radhuni/radhuni_hydrabadi_biryani_masala_45_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p51', name: 'Radhuni Kacchi Biryani Masala', price: 1.3, weight: '(40 gm)', image: '/images/radhuni/radhuni_kacchi_biryani_masala_40_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p52', name: 'Radhuni Kala Bhuna Masala', price: 2.1, weight: '(80 gm)', image: '/images/radhuni/radhuni_kala_bhuna_masala_80_gm.jpg', category: 'Spices & Masala' },
-  { id: 'p53', name: 'Radhuni Korma Masala', price: 1.0, weight: '(30 gm)', image: '/images/radhuni/radhuni_korma_masala_30_gm.jpg', category: 'Spices & Masala' },
+  { id: 'p47', name: 'Radhuni Roast Masala', price: 1.1, weight: '(35 gm)', image: '/images/Radhuni Roast Masala.png', category: 'Spices & Masala' },
+  { id: 'p48', name: 'Radhuni Rezala Masala', price: 1.1, weight: '(32 gm)', image: '/images/Radhuni Rezala Masala.webp', category: 'Spices & Masala' },
+  { id: 'p49', name: 'Radhuni Biryani Masala', price: 1.3, weight: '(40 gm)', image: '/images/Radhuni Biryani Masala.jpeg', category: 'Spices & Masala' },
+  { id: 'p50', name: 'Radhuni Hydrabadi Biryani Masala', price: 1.4, weight: '(45 gm)', image: '/images/Radhuni Hydrabadi Biryani Masala.webp', category: 'Spices & Masala' },
+  { id: 'p51', name: 'Radhuni Kacchi Biryani Masala', price: 1.3, weight: '(40 gm)', image: '/images/Radhuni Kacchi Biryani Masala.jpeg', category: 'Spices & Masala' },
+  { id: 'p52', name: 'Radhuni Kala Bhuna Masala', price: 2.1, weight: '(80 gm)', image: '/images/Radhuni Kala Bhuna Masala.jpeg', category: 'Spices & Masala' },
+  { id: 'p53', name: 'Radhuni Korma Masala', price: 1.0, weight: '(30 gm)', image: '/images/Radhuni Korma Masala.png', category: 'Spices & Masala' },
 ];
 
 export const exploreCategories = [
