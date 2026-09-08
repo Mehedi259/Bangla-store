@@ -39,7 +39,7 @@ export default function ProductRow({ title, categorySlug, products, icon }: Prod
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {products.slice(0, 5).map((product) => (
-          <div key={product.id} className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col relative group overflow-hidden">
+          <div key={product.id} className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col relative group overflow-hidden h-full">
             {product.isBestSeller && (
               <span className="absolute top-2 left-0 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-r-md z-20">
                 Best Seller
@@ -51,8 +51,8 @@ export default function ProductRow({ title, categorySlug, products, icon }: Prod
             >
               <Heart size={16} className={isInWishlist(product.id) ? "fill-primary text-primary" : "text-gray-400"} />
             </button>
-            <Link href={`/product/${product.id}`} className="h-40 md:h-48 w-full relative block bg-white">
-              <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
+            <Link href={`/product/${product.id}`} className="h-40 md:h-48 w-full relative mb-2 p-2 flex items-center justify-center bg-white rounded-t-xl">
+              <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
             </Link>
             <div className="flex-1 flex flex-col justify-between p-4 pt-2">
               <div>

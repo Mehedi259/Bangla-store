@@ -54,24 +54,24 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
         ) : products.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {products.map((product) => (
-              <div key={product.id} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm hover:shadow-md transition flex flex-col relative group">
+              <div key={product.id} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm hover:shadow-md transition flex flex-col relative group h-full">
                 <button 
                   onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
                   className="absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-sm hover:shadow-md hover:text-primary transition z-10"
                 >
                   <Heart size={16} className={isInWishlist(product.id) ? "fill-primary text-primary" : "text-gray-400"} />
                 </button>
-                <Link href={`/product/${product.id}`} className="block h-40 w-full relative mb-4">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
+                <Link href={`/product/${product.id}`} className="block h-40 w-full relative mb-4 p-2 flex items-center justify-center bg-white rounded-md">
+                  <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" />
                 </Link>
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
                     <Link href={`/product/${product.id}`} className="hover:text-primary transition">
-                      <h3 className="font-semibold text-gray-800 text-sm leading-tight mb-1">{product.name}</h3>
+                      <h3 className="font-semibold text-gray-800 text-sm leading-tight mb-1 line-clamp-2 min-h-[40px]">{product.name}</h3>
                     </Link>
-                    <span className="text-xs text-gray-500">{product.weight}</span>
+                    <span className="text-xs text-gray-500 block mb-2">{product.weight}</span>
                   </div>
-                  <div className="mt-4 space-y-3">
+                  <div className="mt-auto space-y-3">
                     <div className="font-bold text-lg">€{product.price.toFixed(2)}</div>
                     <button 
                       onClick={() => addToCart(product)}
