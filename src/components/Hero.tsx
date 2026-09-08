@@ -65,21 +65,21 @@ export default function Hero() {
         </div>
         
         {/* Right Content - Image and Badges */}
-        <div className="w-full md:w-1/2 relative h-[400px] md:h-[600px] z-10 flex items-end justify-center md:justify-end">
+        <div className="w-full md:w-1/2 relative h-[400px] md:h-[600px] z-10 flex items-end justify-center md:justify-center">
           <img 
             src="/images/old man with vagetables.png" 
             alt="Farmer with organic vegetables" 
-            className="h-[110%] w-auto object-contain object-bottom md:absolute md:bottom-0 md:right-10 lg:right-20"
+            className="h-[85%] max-h-[500px] w-auto object-contain object-bottom md:absolute md:bottom-0 md:right-[15%]"
           />
 
           {/* Badges / Pointers (Hidden on mobile for cleaner look) */}
-          <div className="hidden md:flex absolute top-[20%] right-0 lg:-right-10 items-center gap-2">
-            <div className="w-12 border-b border-[#84CC16]/50 border-dashed"></div>
+          <div className="hidden md:flex absolute top-[25%] right-[2%] lg:right-[5%] items-center gap-3">
+            <div className="w-16 lg:w-20 border-b border-[#84CC16]/50 border-dashed"></div>
             <div className="text-white/80 text-sm font-medium">Bed a Cernhisly<br/><span className="text-white">Bistnered</span></div>
           </div>
           
-          <div className="hidden md:flex absolute top-[40%] right-0 lg:-right-10 items-center gap-2">
-            <div className="w-12 border-b border-[#84CC16]/50 border-dashed"></div>
+          <div className="hidden md:flex absolute top-[45%] right-[2%] lg:right-[5%] items-center gap-3">
+            <div className="w-16 lg:w-20 border-b border-[#84CC16]/50 border-dashed"></div>
             <div className="text-white/80 text-sm font-medium">Frait Customer<br/><span className="text-white">Support</span></div>
           </div>
         </div>
