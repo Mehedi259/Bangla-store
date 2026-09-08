@@ -37,8 +37,8 @@ export default function ProductRow({ title, categorySlug, products, icon }: Prod
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {products.slice(0, 5).map((product) => (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {products.slice(0, 8).map((product) => (
           <div key={product.id} className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col relative group overflow-hidden h-full">
             {product.isBestSeller && (
               <span className="absolute top-2 left-0 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-r-md z-20">

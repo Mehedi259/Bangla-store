@@ -11,7 +11,7 @@ import { Star, Fish, Flame, Cookie, Cake, Leaf } from 'lucide-react';
 
 export default function Home() {
   // Filter products by category
-  const bestSellers = featuredProducts.slice(0, 5); // Just take first 5 as featured
+  const bestSellers = featuredProducts.slice(0, 8); // Take first 8 as featured
   const fishProducts = featuredProducts.filter(p => p.category === 'Frozen Fish');
   const spiceProducts = featuredProducts.filter(p => p.category === 'Spices & Masala');
   const snackProducts = featuredProducts.filter(p => p.category === 'Snacks & Biscuits');
