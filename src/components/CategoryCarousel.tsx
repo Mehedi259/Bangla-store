@@ -30,7 +30,7 @@ export default function CategoryCarousel() {
                     <img 
                       src={cat.image} 
                       alt={cat.name} 
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10 drop-shadow-sm"
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain group-hover:scale-110 transition-transform duration-300 relative z-10 drop-shadow-sm mix-blend-multiply"
                     />
                   ) : (
                     <IconComponent className="text-[#032B18] group-hover:scale-110 transition-transform duration-300 relative z-10" size={48} strokeWidth={1.5} />
