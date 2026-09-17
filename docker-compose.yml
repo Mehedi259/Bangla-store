@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ../../Backend/Bangla-store-Backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    volumes:
+      - backend-db:/app/db.sqlite3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=http://167.233.34.127:8000/api
+
+  admin:
+    build:
+      context: ../Bangla-store-Admin
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=http://167.233.34.127:8000/api
+
+volumes:
+  backend-db:
