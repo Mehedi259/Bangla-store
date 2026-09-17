@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { featuredProducts } from '@/data/mockData';
+import { getProducts } from '@/data/api';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const category = searchParams.get('category');
   const query = searchParams.get('q');
 
-  let products = featuredProducts;
+  let products = await getProducts();
 
   if (category && category.toLowerCase() !== 'all') {
     products = products.filter(p => p.category.toLowerCase() === category.toLowerCase());

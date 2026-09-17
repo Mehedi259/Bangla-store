@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import { featuredProducts } from '@/data/mockData';
+import { getProducts } from '@/data/api';
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const product = featuredProducts.find(p => p.id === id);
+  const products = await getProducts();
+  const product = products.find((p: any) => p.id === id);
 
   await new Promise(resolve => setTimeout(resolve, 300));
 

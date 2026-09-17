@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { exploreCategories } from '../data/mockData';
+import { exploreCategories } from '../data/api';
 import { Leaf } from 'lucide-react';
 import Link from 'next/link';
 

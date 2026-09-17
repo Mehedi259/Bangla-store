@@ -1,11 +1,17 @@
 'use client';
 
 import React from 'react';
-import { categories } from '../data/mockData';
+import { getCategories } from '../data/api';
+import { Category } from '../types';
 import * as Icons from 'lucide-react';
 import Link from 'next/link';
 
 export default function CategoryCarousel() {
+  const [categories, setCategories] = React.useState<Category[]>([]);
+
+  React.useEffect(() => {
+    getCategories().then(setCategories);
+  }, []);
   return (
     <div className="bg-white py-16 border-t border-gray-100">
       <div className="container mx-auto px-4 md:px-8 text-center mb-12">

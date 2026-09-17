@@ -6,10 +6,13 @@ import ProductRow from '@/components/ProductRow';
 import Features from '@/components/Features';
 import ExploreMore from '@/components/ExploreMore';
 import Footer from '@/components/Footer';
-import { featuredProducts } from '@/data/mockData';
+import { getProducts } from '@/data/api';
+import { Product } from '@/types';
 import { Star, Fish, Flame, Cookie, Cake, Leaf } from 'lucide-react';
 
-export default function Home() {
+export default async function Home() {
+  const featuredProducts: Product[] = await getProducts();
+  
   // Filter products by category
   const bestSellers = featuredProducts.slice(0, 8); // Take first 8 as featured
   const fishProducts = featuredProducts.filter(p => p.category === 'Frozen Fish');

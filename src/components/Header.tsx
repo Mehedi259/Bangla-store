@@ -5,7 +5,8 @@ import { Search, User, Heart, ShoppingCart, Menu, ChevronDown, MapPin, Truck, Lo
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
-import { categories } from '../data/mockData';
+import { getCategories } from '../data/api';
+import { Category } from '../types';
 import CartDrawer from './CartDrawer';
 import AuthModal from './AuthModal';
 import Link from 'next/link';
@@ -21,6 +22,11 @@ export default function Header() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileCategoryDropdownOpen, setIsMobileCategoryDropdownOpen] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  React.useEffect(() => {
+    getCategories().then(setCategories);
+  }, []);
 
   return (
     <header className="w-full flex flex-col relative md:sticky top-0 z-40 bg-[#032B18] text-white">
