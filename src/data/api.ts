@@ -1,10 +1,11 @@
-export const BASE_URL = 'http://localhost:8000/api';
+export const BASE_URL = 'http://167.233.34.127:8000/api';
 
 export async function getProducts() {
   try {
     const res = await fetch(`${BASE_URL}/products/`, { cache: 'no-store' });
     if (!res.ok) return [];
-    return res.json();
+    const data = await res.json();
+    return data.map((p: any) => ({ ...p, price: Number(p.price) }));
   } catch (e) {
     console.error(e);
     return [];
