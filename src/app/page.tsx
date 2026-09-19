@@ -10,6 +10,8 @@ import { getProducts } from '@/data/api';
 import { Product } from '@/types';
 import { Star, Fish, Flame, Cookie, Cake, Leaf } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const featuredProducts: Product[] = await getProducts();
   

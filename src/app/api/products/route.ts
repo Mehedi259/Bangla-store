@@ -9,11 +9,11 @@ export async function GET(request: Request) {
   let products = await getProducts();
 
   if (category && category.toLowerCase() !== 'all') {
-    products = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
+    products = products.filter((p: any) => p.category.toLowerCase() === category.toLowerCase());
   }
 
   if (query) {
-    products = products.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+    products = products.filter((p: any) => p.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   // Simulate network delay for realism

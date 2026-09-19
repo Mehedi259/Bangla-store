@@ -8,8 +8,6 @@ services:
     ports:
       - "8000:8000"
     restart: unless-stopped
-    volumes:
-      - backend-db:/app/db.sqlite3
 
   frontend:
     build:
@@ -31,5 +29,4 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=http://167.233.34.127:8000/api
 
-volumes:
-  backend-db:
+
