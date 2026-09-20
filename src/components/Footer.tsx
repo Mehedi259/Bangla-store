@@ -94,7 +94,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li><Link href="/profile" className="text-gray-400 hover:text-primary transition text-sm flex items-center gap-2"><span className="text-primary text-xs">▸</span> My Account</Link></li>
-              <li><Link href="/orders" className="text-gray-400 hover:text-primary transition text-sm flex items-center gap-2"><span className="text-primary text-xs">▸</span> Track Order</Link></li>
+              <li><Link href="/track" className="text-gray-400 hover:text-primary transition text-sm flex items-center gap-2"><span className="text-primary text-xs">▸</span> Track Order</Link></li>
               <li><Link href="/faq" className="text-gray-400 hover:text-primary transition text-sm flex items-center gap-2"><span className="text-primary text-xs">▸</span> FAQ</Link></li>
               <li><Link href="/returns" className="text-gray-400 hover:text-primary transition text-sm flex items-center gap-2"><span className="text-primary text-xs">▸</span> Return Policy</Link></li>
               <li><Link href="/contact" className="text-gray-400 hover:text-primary transition text-sm flex items-center gap-2"><span className="text-primary text-xs">▸</span> Contact Support</Link></li>
