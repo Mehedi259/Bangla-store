@@ -8,15 +8,51 @@ import { CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CheckoutPage() {
-  const { cart, cartTotal, cartCount } = useCart();
+  const { cart, cartTotal, cartCount, clearCart } = useCart();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    setTimeout(() => {
+    setIsLoading(true);
+    
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+    const payment = formData.get('payment') || 'Credit / Debit Card';
+    
+    const orderId = `#BS-${Math.floor(100000 + Math.random() * 900000)}`;
+    const totalAmount = cartTotal + (cartTotal > 0 ? 5 : 0);
+    
+    const orderData = {
+      id: orderId,
+      customer_name: `${firstName} ${lastName}`,
+      amount: totalAmount,
+      payment_method: payment,
+      status: 'Pending'
+    };
+
+    try {
+      const res = await fetch('http://167.233.34.127:8000/api/orders/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+      });
+      
+      if (res.ok) {
+        clearCart();
+        setIsSubmitted(true);
+      } else {
+        console.error('Failed to submit order');
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error(error);
       setIsSubmitted(true);
-    }, 1000);
+    }
+    
+    setIsLoading(false);
   };
 
   if (isSubmitted) {
@@ -53,57 +89,57 @@ export default function CheckoutPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
-                  <input required type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
+                  <input required name="firstName" type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
-                  <input required type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
+                  <input required name="lastName" type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
                 </div>
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                <input required type="email" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
+                <input required name="email" type="email" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Street Address *</label>
-                <input required type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
+                <input required name="address" type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
-                  <input required type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
+                  <input required name="city" type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Postal Code *</label>
-                  <input required type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
+                  <input required name="postal" type="text" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-1 focus:ring-primary focus:outline-none" />
                 </div>
               </div>
               
               <h2 className="text-xl font-bold mb-4 mt-8 border-b pb-4">Payment Method</h2>
               <div className="space-y-3">
                 <label className="flex items-center gap-3 p-3 border rounded-md cursor-pointer hover:bg-gray-50 bg-green-50 border-primary">
-                  <input type="radio" name="payment" defaultChecked className="text-primary focus:ring-primary h-4 w-4" />
+                  <input type="radio" name="payment" value="Credit / Debit Card" defaultChecked className="text-primary focus:ring-primary h-4 w-4" />
                   <span className="font-medium">Credit / Debit Card</span>
                 </label>
                 <label className="flex items-center gap-3 p-3 border rounded-md cursor-pointer hover:bg-gray-50">
-                  <input type="radio" name="payment" className="text-primary focus:ring-primary h-4 w-4" />
+                  <input type="radio" name="payment" value="iDEAL" className="text-primary focus:ring-primary h-4 w-4" />
                   <span className="font-medium">iDEAL</span>
                 </label>
                 <label className="flex items-center gap-3 p-3 border rounded-md cursor-pointer hover:bg-gray-50">
-                  <input type="radio" name="payment" className="text-primary focus:ring-primary h-4 w-4" />
+                  <input type="radio" name="payment" value="Cash on Delivery" className="text-primary focus:ring-primary h-4 w-4" />
                   <span className="font-medium">Cash on Delivery</span>
                 </label>
               </div>
 
               <button 
                 type="submit"
-                disabled={cart.length === 0}
+                disabled={cart.length === 0 || isLoading}
                 className="w-full mt-8 bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white font-bold py-3 rounded-lg transition"
               >
-                Place Order
+                {isLoading ? 'Processing...' : 'Place Order'}
               </button>
             </form>
           </div>

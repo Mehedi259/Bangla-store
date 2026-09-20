@@ -6,22 +6,18 @@ import ProductRow from '@/components/ProductRow';
 import Features from '@/components/Features';
 import ExploreMore from '@/components/ExploreMore';
 import Footer from '@/components/Footer';
-import { getProducts } from '@/data/api';
+import { getProducts, getCategories } from '@/data/api';
 import { Product } from '@/types';
-import { Star, Fish, Flame, Cookie, Cake, Leaf } from 'lucide-react';
+import * as Icons from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const featuredProducts: Product[] = await getProducts();
+  const categories = await getCategories();
   
   // Filter products by category
   const bestSellers = featuredProducts.slice(0, 8); // Take first 8 as featured
-  const fishProducts = featuredProducts.filter(p => p.category === 'Frozen Fish');
-  const spiceProducts = featuredProducts.filter(p => p.category === 'Spices & Masala');
-  const snackProducts = featuredProducts.filter(p => p.category === 'Snacks & Biscuits');
-  const sweetProducts = featuredProducts.filter(p => p.category === 'Sweets & Desserts');
-  const vegProducts = featuredProducts.filter(p => p.category === 'Fresh Vegetables');
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FAFB]">
@@ -32,12 +28,24 @@ export default async function Home() {
         <CategoryCarousel />
         
         <div className="space-y-4 py-8">
-          <ProductRow title="Featured Products" categorySlug="all" products={bestSellers} icon={<Star size={24} />} />
-          <ProductRow title="Fresh Vegetables" categorySlug="fresh vegetables" products={vegProducts} icon={<Leaf size={24} />} />
-          <ProductRow title="Snacks & Biscuits" categorySlug="snacks & biscuits" products={snackProducts} icon={<Cookie size={24} />} />
-          <ProductRow title="Sweets & Desserts" categorySlug="sweets & desserts" products={sweetProducts} icon={<Cake size={24} />} />
-          <ProductRow title="Spices & Masala" categorySlug="spices & masala" products={spiceProducts} icon={<Flame size={24} />} />
-          <ProductRow title="Frozen Fish" categorySlug="frozen fish" products={fishProducts} icon={<Fish size={24} />} />
+          <ProductRow title="Featured Products" categorySlug="all" products={bestSellers} icon={<Icons.Star size={24} />} />
+          
+          {categories.map((cat: any) => {
+            const catProducts = featuredProducts.filter(p => p.category === cat.name);
+            if (catProducts.length === 0) return null;
+            
+            const IconComponent = (Icons as any)[cat.icon] || Icons.Layers;
+            
+            return (
+              <ProductRow 
+                key={cat.id}
+                title={cat.name} 
+                categorySlug={cat.name.toLowerCase()} 
+                products={catProducts} 
+                icon={<IconComponent size={24} />} 
+              />
+            );
+          })}
         </div>
 
         <Features />
