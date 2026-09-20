@@ -1,6 +1,6 @@
 import { categories, featuredProducts } from './src/data/mockData';
 
-const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'http://167.233.34.127:8000/api';
 
 async function seedData() {
   console.log("Seeding categories...");
