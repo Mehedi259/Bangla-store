@@ -22,7 +22,7 @@ interface OrderConfirmInfo {
 export default function CheckoutPage() {
   const { cart, cartTotal, cartCount, clearCart } = useCart();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [shippingLoading, setShippingLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [shippingDone, setShippingDone] = useState(false);
@@ -73,7 +73,7 @@ export default function CheckoutPage() {
 
     if (paymentMethod === 'card') {
       // Create PaymentIntent for card payments
-      setIsLoading(true);
+      setShippingLoading(true);
       try {
         const orderId = `#BS-${Math.floor(100000 + Math.random() * 900000)}`;
         const res = await fetch('/api/stripe/create-payment-intent', {
@@ -91,7 +91,7 @@ export default function CheckoutPage() {
 
         if (!res.ok || data.error) {
           setErrorMsg(data.error || 'Could not initialize payment. Please check your Stripe keys in .env.local');
-          setIsLoading(false);
+          setShippingLoading(false);
           return;
         }
 
@@ -100,10 +100,10 @@ export default function CheckoutPage() {
         sessionStorage.setItem('pendingOrderId', orderId);
       } catch (err) {
         setErrorMsg('Payment initialization failed. Please try again.');
-        setIsLoading(false);
+        setShippingLoading(false);
         return;
       }
-      setIsLoading(false);
+      setShippingLoading(false);
     }
 
     setShippingDone(true);
@@ -301,10 +301,10 @@ export default function CheckoutPage() {
 
                   <button
                     type="submit"
-                    disabled={cart.length === 0 || isLoading}
+                    disabled={cart.length === 0 || shippingLoading}
                     className="w-full mt-2 bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"
                   >
-                    {isLoading ? 'Preparing...' : paymentMethod === 'card' ? 'Continue to Payment →' : 'Place Order'}
+                    {shippingLoading ? 'Preparing...' : paymentMethod === 'card' ? 'Continue to Payment →' : 'Place Order'}
                   </button>
                 </form>
               ) : (
@@ -346,8 +346,6 @@ export default function CheckoutPage() {
                       amount={totalAmount}
                       onSuccess={handlePaymentSuccess}
                       onError={(err) => setErrorMsg(err)}
-                      isSubmitting={isLoading}
-                      setIsSubmitting={setIsLoading}
                     />
                   </Elements>
                 ) : paymentMethod === 'cash' ? (
@@ -361,10 +359,10 @@ export default function CheckoutPage() {
                     </div>
                     <button
                       onClick={handleCashOnDelivery}
-                      disabled={isLoading}
+                      disabled={shippingLoading}
                       className="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"
                     >
-                      {isLoading ? 'Placing Order...' : `Confirm Order — €${totalAmount.toFixed(2)}`}
+                      {shippingLoading ? 'Placing Order...' : `Confirm Order — €${totalAmount.toFixed(2)}`}
                     </button>
                   </div>
                 ) : null}

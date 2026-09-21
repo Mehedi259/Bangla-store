@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2026-08-26.dahlia',
-});
-
 export async function POST(request: Request) {
   try {
+    const stripeSecret = process.env.STRIPE_SECRET_KEY;
+    if (!stripeSecret) {
+      throw new Error('STRIPE_SECRET_KEY is not defined in environment variables');
+    }
+
+    const stripe = new Stripe(stripeSecret, {
+      apiVersion: '2026-08-26.dahlia',
+    });
     const { amount, currency = 'eur', orderId, customerName } = await request.json();
 
     if (!amount || amount <= 0) {

@@ -12,19 +12,16 @@ interface StripePaymentFormProps {
   onSuccess: (paymentIntentId: string) => void;
   onError: (error: string) => void;
   amount: number;
-  isSubmitting: boolean;
-  setIsSubmitting: (val: boolean) => void;
 }
 
 export default function StripePaymentForm({
   onSuccess,
   onError,
   amount,
-  isSubmitting,
-  setIsSubmitting,
 }: StripePaymentFormProps) {
   const stripe = useStripe();
   const elements = useElements();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,8 +38,9 @@ export default function StripePaymentForm({
     });
 
     if (error) {
-      setErrorMessage(error.message || 'Payment failed. Please try again.');
-      onError(error.message || 'Payment failed');
+      const msg = error.message || 'Payment failed. Please try again.';
+      setErrorMessage(msg);
+      onError(msg);
       setIsSubmitting(false);
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
       onSuccess(paymentIntent.id);
