@@ -23,13 +23,13 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
-            Your One-Stop Shop <br />
-            for <span className="text-[#84CC16]">Organic Products</span>
+            Everything You Love. <br />
+            <span className="text-[#84CC16]">From Home to Your Home.</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-base md:text-lg text-gray-300 font-medium max-w-md leading-relaxed">
-            Fresh, local, Delivered to your doorstep. We care about what goes into your kitchen for your family and your health.
+            Bringing your favourite Bangladeshi groceries, familiar brands and everyday essentials closer to you in the Netherlands.
           </p>
 
           {/* Buttons */}

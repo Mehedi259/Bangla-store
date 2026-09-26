@@ -26,7 +26,8 @@ export default function TrackOrderPage() {
       }
 
       const encodedId = encodeURIComponent(fetchId);
-      const res = await fetch(`http://167.233.34.127:8000/api/orders/${encodedId}/`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://167.233.34.127:8000/api';
+      const res = await fetch(`${apiUrl}/orders/${encodedId}/`);
       
       if (!res.ok) {
         if (res.status === 404) {

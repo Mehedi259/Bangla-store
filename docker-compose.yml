@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    volumes:
+      - ../../Backend/Bangla-store-Backend/db.sqlite3:/app/db.sqlite3
+      - ../../Backend/Bangla-store-Backend/media:/app/media
     restart: unless-stopped
 
   frontend:
@@ -17,7 +20,9 @@ services:
       - "3000:3000"
     restart: unless-stopped
     environment:
-      - NEXT_PUBLIC_API_URL=http://167.233.34.127:8000/api
+      - NEXT_PUBLIC_API_URL=https://api.banglastoreandtabac.com/api
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
 
   admin:
     build:
@@ -27,6 +32,16 @@ services:
       - "3001:3001"
     restart: unless-stopped
     environment:
-      - NEXT_PUBLIC_API_URL=http://167.233.34.127:8000/api
+      - NEXT_PUBLIC_API_URL=https://api.banglastoreandtabac.com/api
 
-
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - admin
+      - backend
+    restart: unless-stopped

@@ -18,8 +18,10 @@ export default function ExploreMore() {
 
   const getImageUrl = (url: string) => {
     if (!url) return '/images/explore_vegetables.jpg'; // fallback
-    if (url.startsWith('/images/')) return `http://167.233.34.127:3000${url}`;
-    if (url.startsWith('/media/')) return `http://167.233.34.127:8000${url}`;
+    const baseUrl = new URL(process.env.NEXT_PUBLIC_API_URL || 'http://167.233.34.127:8000/api').origin;
+    const frontendUrl = process.env.NEXT_PUBLIC_API_URL ? 'https://banglastoreandtabac.com' : 'http://167.233.34.127:3000';
+    if (url.startsWith('/images/')) return `${frontendUrl}${url}`;
+    if (url.startsWith('/media/')) return `${baseUrl}${url}`;
     return url;
   };
 
@@ -37,7 +39,7 @@ export default function ExploreMore() {
         {categories.map((item, index) => (
           <Link href={`/category/${item.name.toLowerCase()}`} key={item.id || index} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer group border border-gray-100 block">
             <div className="h-32 w-full overflow-hidden bg-gray-50 flex items-center justify-center">
-              <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <img loading="lazy" src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="p-3 text-center">
               <h4 className="font-bold text-gray-800 text-sm mb-1">{item.name}</h4>

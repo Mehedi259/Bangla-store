@@ -110,7 +110,19 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">123 Market Street, <br />1012 AB Amsterdam, <br />Netherlands</span>
+                <span className="text-gray-400 text-sm">Eerste Oosterparkstraat 172, <br />1091 HJ Amsterdam, <br />Netherlands</span>
+              </li>
+              <li className="mt-4">
+                <iframe 
+                  src="https://maps.google.com/maps?q=Eerste%20Oosterparkstraat%20172,%201091%20HJ%20Amsterdam&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="180" 
+                  style={{ border: 0, borderRadius: '8px' }} 
+                  allowFullScreen={false} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Bangla Store Location"
+                ></iframe>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={20} className="text-primary flex-shrink-0" />

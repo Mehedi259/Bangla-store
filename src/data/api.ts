@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://167.233.34.127:8000/api';
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://167.233.34.127:8000/api';
 
 export async function getProducts() {
   try {

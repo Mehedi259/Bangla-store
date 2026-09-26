@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { WishlistProvider } from "@/context/WishlistContext";
+import FloatingCartButton from "@/components/FloatingCartButton";
 import React from "react";
 
 const geistSans = Geist({
@@ -42,6 +43,7 @@ export default function RootLayout({
           <WishlistProvider>
             <CartProvider>
               {children}
+              <FloatingCartButton />
             </CartProvider>
           </WishlistProvider>
         </AuthProvider>
